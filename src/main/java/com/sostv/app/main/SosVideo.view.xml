@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ViewConfig>
+  <Arguments/>
+  <Context/>
+  <Model/>
+  <View>
+    <DataSet id="dsSosVideo">
+      <Property name="dataType">[$dtSosVideo]</Property>
+      <Property name="dataProvider">sostv.SosVideoPR#loadSosVideo</Property>
+      <Property name="pageSize">10</Property>
+    </DataSet>
+    <ToolBar>
+      <DataPilot>
+        <Property name="dataSet">dsSosVideo</Property>
+      </DataPilot>
+      <Button>
+        <ClientEvent name="onClick">view.id('addVideo').show();&#xD;
+view.id('dsSosVideo').insert();&#xD;
+</ClientEvent>
+        <Property name="caption">添加新视频</Property>
+      </Button>
+      <Button>
+        <ClientEvent name="onClick">view.id('editVideo').show();</ClientEvent>
+        <Property name="caption">编辑视频</Property>
+      </Button>
+      <Button>
+        <ClientEvent name="onClick">var sosVideo = view.id('dsSosVideo').getData('#');&#xD;
+var videoName = sosVideo.get('videoName');&#xD;
+dorado.MessageBox.confirm(&quot;确定要删除[&quot;+videoName+&quot;]吗？&quot;,function(){&#xD;
+	view.id('deleteAction').set('parameter',{&#xD;
+		id : sosVideo.get('id')&#xD;
+	}).execute(function(){&#xD;
+		view.id('dsSosVideo').flushAsync();&#xD;
+	});&#xD;
+});&#xD;
+</ClientEvent>
+        <Property name="caption">删除视频</Property>
+      </Button>
+    </ToolBar>
+    <DataGrid>
+      <Property name="dataSet">dsSosVideo</Property>
+      <Property name="readOnly">true</Property>
+      <DataColumn name="videoName">
+        <Property name="property">videoName</Property>
+        <Property name="align">center</Property>
+      </DataColumn>
+      <DataColumn name="vedioImage">
+        <Property name="property">vedioImage</Property>
+      </DataColumn>
+      <DataColumn name="videoHdUrl">
+        <Property name="property">videoHdUrl</Property>
+      </DataColumn>
+      <DataColumn name="videoSdUrl">
+        <Property name="property">videoSdUrl</Property>
+      </DataColumn>
+      <DataColumn name="pubDate">
+        <Property name="property">pubDate</Property>
+      </DataColumn>
+      <DataColumn name="loveNum">
+        <Property name="property">loveNum</Property>
+      </DataColumn>
+      <DataColumn name="lookNum">
+        <Property name="property">lookNum</Property>
+      </DataColumn>
+      <DataColumn name="typeLevel1">
+        <Property name="property">typeLevel1</Property>
+      </DataColumn>
+      <DataColumn name="typeLevel2">
+        <Property name="property">typeLevel2</Property>
+      </DataColumn>
+    </DataGrid>
+    <Dialog id="addVideo">
+      <ClientEvent name="onHide">view.id('dsSosVideo').flushAsync();&#xD;
+</ClientEvent>
+      <Property name="caption">添加新视频</Property>
+      <Property name="width">60%</Property>
+      <Property name="height">60%</Property>
+      <Buttons>
+        <Button>
+          <ClientEvent name="onClick">view.id('saveAction').execute(function(){&#xD;
+	view.id('addVideo').close();&#xD;
+});&#xD;
+</ClientEvent>
+          <Property name="caption">保存</Property>
+        </Button>
+        <Button>
+          <ClientEvent name="onClick">view.id('addVideo').close();&#xD;
+</ClientEvent>
+          <Property name="caption">取消</Property>
+        </Button>
+      </Buttons>
+      <Children>
+        <AutoForm>
+          <Property name="dataSet">dsSosVideo</Property>
+          <Property name="cols">*</Property>
+          <Property name="labelWidth">100</Property>
+          <AutoFormElement>
+            <Property name="name">videoName</Property>
+            <Property name="property">videoName</Property>
+            <Editor/>
+          </AutoFormElement>
+          <AutoFormElement>
+            <Property name="name">vedioImage</Property>
+            <Property name="property">vedioImage</Property>
+            <Editor/>
+          </AutoFormElement>
+          <AutoFormElement>
+            <Property name="name">videoHdUrl</Property>
+            <Property name="property">videoHdUrl</Property>
+            <Editor/>
+          </AutoFormElement>
+          <AutoFormElement>
+            <Property name="name">videoSdUrl</Property>
+            <Property name="property">videoSdUrl</Property>
+            <Editor/>
+          </AutoFormElement>
+          <AutoFormElement>
+            <Property name="name">pubDate</Property>
+            <Property name="property">pubDate</Property>
+            <Editor/>
+          </AutoFormElement>
+          <AutoFormElement>
+            <Property name="name">typeLevel1</Property>
+            <Property name="property">typeLevel1</Property>
+            <Editor/>
+          </AutoFormElement>
+          <AutoFormElement>
+            <Property name="name">typeLevel2</Property>
+            <Property name="property">typeLevel2</Property>
+            <Editor/>
+          </AutoFormElement>
+        </AutoForm>
+      </Children>
+      <Tools/>
+    </Dialog>
+    <Dialog id="editVideo">
+      <ClientEvent name="onHide">view.id('dsSosVideo').flushAsync();</ClientEvent>
+      <Property name="caption">编辑视频</Property>
+      <Property name="width">60%</Property>
+      <Property name="height">60%</Property>
+      <Buttons>
+        <Button>
+          <ClientEvent name="onClick">view.id('saveAction').execute(function(){&#xD;
+	view.id('editVideo').close();&#xD;
+});&#xD;
+</ClientEvent>
+          <Property name="caption">保存</Property>
+        </Button>
+        <Button>
+          <ClientEvent name="onClick">view.id('editVideo').close();&#xD;
+</ClientEvent>
+          <Property name="caption">取消</Property>
+        </Button>
+      </Buttons>
+      <Children>
+        <AutoForm>
+          <Property name="dataSet">dsSosVideo</Property>
+          <Property name="cols">*</Property>
+          <Property name="labelWidth">100</Property>
+          <AutoFormElement>
+            <Property name="name">videoName</Property>
+            <Property name="property">videoName</Property>
+            <Editor/>
+          </AutoFormElement>
+          <AutoFormElement>
+            <Property name="name">vedioImage</Property>
+            <Property name="property">vedioImage</Property>
+            <Editor/>
+          </AutoFormElement>
+          <AutoFormElement>
+            <Property name="name">videoHdUrl</Property>
+            <Property name="property">videoHdUrl</Property>
+            <Editor/>
+          </AutoFormElement>
+          <AutoFormElement>
+            <Property name="name">videoSdUrl</Property>
+            <Property name="property">videoSdUrl</Property>
+            <Editor/>
+          </AutoFormElement>
+          <AutoFormElement>
+            <Property name="name">pubDate</Property>
+            <Property name="property">pubDate</Property>
+            <Editor/>
+          </AutoFormElement>
+          <AutoFormElement>
+            <Property name="name">typeLevel1</Property>
+            <Property name="property">typeLevel1</Property>
+            <Editor/>
+          </AutoFormElement>
+          <AutoFormElement>
+            <Property name="name">typeLevel2</Property>
+            <Property name="property">typeLevel2</Property>
+            <Editor/>
+          </AutoFormElement>
+        </AutoForm>
+      </Children>
+      <Tools/>
+    </Dialog>
+    <UpdateAction id="saveAction">
+      <Property name="dataResolver">sostv.SosVideoPR#saveSosVideo</Property>
+      <Property name="successMessage">保存成功</Property>
+      <UpdateItem>
+        <Property name="dataSet">dsSosVideo</Property>
+      </UpdateItem>
+    </UpdateAction>
+    <AjaxAction id="deleteAction">
+      <Property name="service">sostv.SosVideoPR#deleteSosVideo</Property>
+      <Property name="successMessage">删除成功</Property>
+    </AjaxAction>
+  </View>
+</ViewConfig>

@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ViewConfig>
+  <Arguments/>
+  <Context/>
+  <Model>
+    <DataType name="dtSoshome" parent="$dtSosHome">
+      <Property name="creationType">com.sostv.app.models.SosHome</Property>
+    </DataType>
+  </Model>
+  <View>
+    <ClientEvent name="onReady">window.openFram = function(index){&#xD;
+	var tabControl = view.id('mainFrame');&#xD;
+	if(index == 'node1'){&#xD;
+		addTabFrame(tabControl,'发布每日资讯',&quot;com.sostv.app.main.HtmlEditText.d&quot;);&#xD;
+	}else if(index == 'node2'){&#xD;
+		addTabFrame(tabControl,'发布视频',&quot;com.sostv.app.main.SosVideo.d&quot;);&#xD;
+	}else if(index == 'node3'){&#xD;
+		addTabFrame(tabControl,'添加书籍',&quot;com.sostv.app.main.SosBooksView.d&quot;);&#xD;
+	}else if(index == 'node4'){&#xD;
+		addTabFrame(tabControl,'资源类别设置',&quot;com.sostv.app.main.SosDictionaryView.d&quot;);&#xD;
+	}&#xD;
+}&#xD;
+&#xD;
+window.addTabFrame = function(tabControl,caption,url){&#xD;
+	newTab = tabControl.addTab({&#xD;
+		$type : &quot;IFrame&quot;,&#xD;
+		caption :caption,&#xD;
+		closeable : true,&#xD;
+		path : url&#xD;
+	});&#xD;
+}&#xD;
+</ClientEvent>
+    <DataSet id="dsSosHome">
+      <Property name="dataType">dtSoshome</Property>
+      <Property name="dataProvider">sostv.SosHomePR#loadSosHome</Property>
+    </DataSet>
+    <SplitPanel>
+      <Property name="position">260</Property>
+      <Property name="visible">false</Property>
+      <Property name="hideMode">display</Property>
+      <MainControl>
+        <TabControl id="mainFrame"/>
+      </MainControl>
+      <SideControl>
+        <Accordion>
+          <Section>
+            <Property name="iconClass">fa fa-sitemap</Property>
+            <Property name="caption">后台内容管理</Property>
+            <Container>
+              <Tree id="tree">
+                <ClientEvent name="onDoubleClick">openFram(view.id('tree').get('currentNode').get('tags'));</ClientEvent>
+                <Property name="allowNoCurrent">true</Property>
+                <Node>
+                  <Property name="expandedIconClass">fa fa-folder-open-o</Property>
+                  <Property name="iconClass">fa fa-folder-o</Property>
+                  <Property name="label">发布每日资讯</Property>
+                  <Property name="tags">node1</Property>
+                </Node>
+                <Node>
+                  <Property name="label">发布视频</Property>
+                  <Property name="expandedIconClass">fa fa-folder-open-o</Property>
+                  <Property name="iconClass">fa fa-folder-o</Property>
+                  <Property name="tags">node2</Property>
+                </Node>
+                <Node>
+                  <Property name="label">添加书籍</Property>
+                  <Property name="expandedIconClass">fa fa-folder-open-o</Property>
+                  <Property name="iconClass">fa fa-folder-o</Property>
+                  <Property name="tags">node3</Property>
+                </Node>
+                <Node>
+                  <Property name="label">资源类别设置</Property>
+                  <Property name="expandedIconClass">fa fa-folder-open-o</Property>
+                  <Property name="iconClass">fa fa-folder-o</Property>
+                  <Property name="tags">node4</Property>
+                </Node>
+              </Tree>
+            </Container>
+          </Section>
+        </Accordion>
+      </SideControl>
+    </SplitPanel>
+    <VerticalTabControl>
+      <ControlTab>
+        <Property name="caption">发布每日灵粮</Property>
+        <Container>
+          <AutoForm>
+            <Property name="dataSet">dsSosHome</Property>
+            <Property name="cols">*,*</Property>
+            <Property name="width">80%</Property>
+            <AutoFormElement layoutConstraint="colSpan:2">
+              <Property name="name">title</Property>
+              <Property name="property">title</Property>
+              <Editor/>
+            </AutoFormElement>
+            <AutoFormElement layoutConstraint="colSpan:2">
+              <Property name="name">content</Property>
+              <Property name="property">content</Property>
+              <Editor/>
+            </AutoFormElement>
+            <AutoFormElement>
+              <Property name="name">imageUrl</Property>
+              <Property name="property">imageUrl</Property>
+              <Property name="width">500</Property>
+              <Editor/>
+            </AutoFormElement>
+            <HtmlContainer>
+              <ClientEvent name="onCreate">window.clearContent = function(){&#xD;
+	view.id('homeContent').set('content','');&#xD;
+	view.id('dsSosHome').flush();&#xD;
+}&#xD;
+&#xD;
+window.save = function(){&#xD;
+	var entity = view.id('dsSosHome').getData('#');&#xD;
+	if(!entity.get('title')){&#xD;
+		dorado.MessageBox.alert('请填写文章标题');&#xD;
+		return;&#xD;
+	}&#xD;
+	if(!entity.get('content')){&#xD;
+		dorado.MessageBox.alert('请填写文章副标题');&#xD;
+		return;&#xD;
+	}&#xD;
+	if(!entity.get('imageUrl')){&#xD;
+		dorado.MessageBox.alert('请上传一个图片或填写一个图片路径');&#xD;
+		return;&#xD;
+	}	&#xD;
+	if(!view.id('homeContent').get('content')){&#xD;
+		dorado.MessageBox.alert('请在文章编辑处编辑文章后再点保存');&#xD;
+		return;&#xD;
+	}&#xD;
+	view.id('saveAction').execute(function(){&#xD;
+		view.id('saveContentAction').set('parameter',{&#xD;
+			id : entity.get('id'),&#xD;
+			text : view.id('homeContent').get('content')&#xD;
+		}).execute(function(){&#xD;
+			clearContent();&#xD;
+		});&#xD;
+	});&#xD;
+}&#xD;
+</ClientEvent>
+              <Property name="content">&lt;div>&lt;a href=&quot;javascript:save()&quot; class=&quot;button blue&quot;>保存&lt;/a> &lt;a href=&quot;javascript:clearContent()&quot; class=&quot;button blue&quot;>清空&lt;/a> &lt;/div></Property>
+            </HtmlContainer>
+          </AutoForm>
+          <HtmlEditor id="homeContent"/>
+        </Container>
+      </ControlTab>
+    </VerticalTabControl>
+    <UpdateAction id="saveAction">
+      <Property name="dataResolver">sostv.SosHomePR#saveHome</Property>
+      <Property name="successMessage">保存成功</Property>
+      <Property name="async">false</Property>
+      <UpdateItem>
+        <Property name="dataSet">dsSosHome</Property>
+      </UpdateItem>
+    </UpdateAction>
+    <AjaxAction id="saveContentAction">
+      <Property name="async">false</Property>
+      <Property name="service">sostv.SosHomePR#saveSosContent</Property>
+    </AjaxAction>
+  </View>
+</ViewConfig>

@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ViewConfig>
+  <Arguments/>
+  <Context/>
+  <Model/>
+  <View>
+    <DataSet id="dsSosBooks">
+      <Property name="dataType">[$dtSosBooks]</Property>
+      <Property name="dataProvider">sostv.SosBookPR#loadSosBooks</Property>
+      <Property name="pageSize">10</Property>
+    </DataSet>
+    <ToolBar>
+      <DataPilot>
+        <Property name="dataSet">dsSosBooks</Property>
+      </DataPilot>
+      <Button>
+        <ClientEvent name="onClick">view.id('addNewBook').show();&#xD;
+</ClientEvent>
+        <Property name="caption">添加新书籍</Property>
+      </Button>
+      <Button>
+        <Property name="caption">编辑书籍</Property>
+      </Button>
+      <Button>
+        <Property name="caption">删除书籍</Property>
+      </Button>
+    </ToolBar>
+    <DataGrid>
+      <Property name="dataSet">dsSosBooks</Property>
+      <Property name="readOnly">true</Property>
+      <DataColumn name="bookName">
+        <Property name="property">bookName</Property>
+        <Property name="align">center</Property>
+      </DataColumn>
+      <DataColumn name="bookImage">
+        <Property name="property">bookImage</Property>
+        <Property name="align">center</Property>
+      </DataColumn>
+      <DataColumn name="bookLink">
+        <Property name="property">bookLink</Property>
+        <Property name="align">center</Property>
+      </DataColumn>
+      <DataColumn name="loveNum">
+        <Property name="property">loveNum</Property>
+        <Property name="align">center</Property>
+      </DataColumn>
+      <DataColumn name="lookNum">
+        <Property name="property">lookNum</Property>
+        <Property name="align">center</Property>
+      </DataColumn>
+      <DataColumn name="typeLevel1">
+        <Property name="property">typeLevel1</Property>
+        <Property name="align">center</Property>
+      </DataColumn>
+      <DataColumn name="typeLevel2">
+        <Property name="property">typeLevel2</Property>
+        <Property name="align">center</Property>
+      </DataColumn>
+    </DataGrid>
+    <Dialog id="addNewBook">
+      <Property name="caption">添加书籍</Property>
+      <Property name="width">80%</Property>
+      <Property name="height">80%</Property>
+      <Property name="center">true</Property>
+      <Buttons>
+        <Button>
+          <Property name="caption">保存</Property>
+        </Button>
+        <Button>
+          <ClientEvent name="onClick">view.id('addNewBook').hide();&#xD;
+</ClientEvent>
+          <Property name="caption">取消</Property>
+        </Button>
+      </Buttons>
+      <Children>
+        <Container>
+          <UploadAction id="uploadAction">
+            <Property name="caption">文件上传</Property>
+            <Property name="fileResolver">sostv.SosBookPR#uploadFile</Property>
+            <Filters>
+              <Filter>
+                <Property name="extensions">doc</Property>
+              </Filter>
+            </Filters>
+          </UploadAction>
+          <Button>
+            <Property name="action">uploadAction</Property>
+            <Property name="caption">上传</Property>
+          </Button>
+        </Container>
+      </Children>
+      <Tools/>
+    </Dialog>
+  </View>
+</ViewConfig>

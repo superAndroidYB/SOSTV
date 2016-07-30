@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<schema dbtype="MySql">
+   <x>0</x>
+   <y>0</y>
+   <width>350</width>
+   <height>130</height>
+   <table id="1">
+      <x>5</x>
+      <y>5</y>
+      <width>350</width>
+      <height>130</height>
+      <name>sos_content</name>
+      <label>sos_content</label>
+      <comment>InnoDB free: 11264 kB</comment>
+      <column id="2">
+         <x>0</x>
+         <y>0</y>
+         <width>350</width>
+         <height>130</height>
+         <pk>true</pk>
+         <fk>false</fk>
+         <autoIncrement>false</autoIncrement>
+         <name>ID_</name>
+         <label>ID_</label>
+         <type>VARCHAR</type>
+         <length>50</length>
+         <decimalLength/>
+         <defaultValue/>
+         <notNull>true</notNull>
+         <unique>false</unique>
+         <defaultValue/>
+         <comment/>
+      </column>
+      <column id="3">
+         <x>0</x>
+         <y>0</y>
+         <width>350</width>
+         <height>130</height>
+         <pk>false</pk>
+         <fk>false</fk>
+         <autoIncrement>false</autoIncrement>
+         <name>CONTENT_</name>
+         <label>CONTENT_</label>
+         <type>LONGTEXT</type>
+         <length/>
+         <decimalLength/>
+         <defaultValue/>
+         <notNull>true</notNull>
+         <unique>false</unique>
+         <defaultValue/>
+         <comment/>
+      </column>
+      <column id="4">
+         <x>0</x>
+         <y>0</y>
+         <width>350</width>
+         <height>130</height>
+         <pk>false</pk>
+         <fk>false</fk>
+         <autoIncrement>false</autoIncrement>
+         <name>REF_ID_</name>
+         <label>REF_ID_</label>
+         <type>VARCHAR</type>
+         <length>50</length>
+         <decimalLength/>
+         <defaultValue/>
+         <notNull>true</notNull>
+         <unique>false</unique>
+         <defaultValue/>
+         <comment/>
+      </column>
+   </table>
+</schema>

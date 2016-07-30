@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.sostvapp.com/ws" xmlns:tns="http://www.sostvapp.com/ws" elementFormDefault="qualified">
+
+	<element name="SostvRequest">
+		<complexType>
+			<all>
+				<element name="serviceType" type="string"></element>
+				<element name="source" type="string"></element>
+				<element name="data" type="string"></element>
+			</all>
+		</complexType>
+	</element>
+	
+	<element name="SostvResponse">
+		<complexType>
+			<sequence>
+				<element name="source" type="string"></element>
+				<element name="returnCode" type="string"></element>
+				<element name="returnMessage" type="string"></element>
+				<element name="returnData" type="string"></element>
+			</sequence>
+		</complexType>
+	</element>
+
+</schema>

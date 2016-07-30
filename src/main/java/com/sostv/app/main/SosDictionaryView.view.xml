@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ViewConfig>
+  <Arguments/>
+  <Context/>
+  <Model>
+    <DataType name="dtSosDictionary">
+      <Property name="creationType">com.sostv.app.models.SosDictionary</Property>
+      <PropertyDef name="id">
+        <Property/>
+        <Property name="label">ID_</Property>
+      </PropertyDef>
+      <PropertyDef name="code">
+        <Property/>
+        <Property name="label">类型编码</Property>
+        <Property name="required">true</Property>
+      </PropertyDef>
+      <PropertyDef name="value">
+        <Property/>
+        <Property name="label">类型值</Property>
+        <Property name="required">true</Property>
+      </PropertyDef>
+      <PropertyDef name="parentCode">
+        <Property/>
+        <Property name="label">PARENT_CODE_</Property>
+      </PropertyDef>
+      <PropertyDef name="order">
+        <Property name="dataType">int</Property>
+        <Property name="label">ORDER_</Property>
+      </PropertyDef>
+      <PropertyDef name="level">
+        <Property name="dataType">int</Property>
+      </PropertyDef>
+      <PropertyDef name="hasChild">
+        <Property name="dataType">boolean</Property>
+      </PropertyDef>
+      <PropertyDef name="childCount">
+        <Property name="dataType">int</Property>
+      </PropertyDef>
+      <Reference name="dictionaries">
+        <Property name="dataProvider">sostv.SosDictionaryPR#loadAllDictionary</Property>
+        <Property name="dataType">[SELF]</Property>
+        <Property name="parameter">$${this.code}</Property>
+      </Reference>
+      <Reference name="childDictionaries">
+        <Property name="dataProvider">sostv.SosDictionaryPR#loadDictionaryById</Property>
+        <Property name="dataType">[SELF]</Property>
+        <Property name="parameter">$${this.code}</Property>
+      </Reference>
+    </DataType>
+  </Model>
+  <View>
+    <SplitPanel>
+      <Property name="position">260</Property>
+      <MainControl>
+        <Container>
+          <DataSet id="dsDiction">
+            <ClientEvent name="onLoadData">var data = view.id('dsDiction').getData('#');&#xD;
+if(data){&#xD;
+	if(data.get('level') == 1){&#xD;
+		view.id('btnAddDictionary').set('visible',true);&#xD;
+	}else{&#xD;
+		view.id('btnAddDictionary').set('visible',false);&#xD;
+	}&#xD;
+}</ClientEvent>
+            <Property name="dataType">dtSosDictionary</Property>
+            <Property name="dataProvider">sostv.SosDictionaryPR#loadDictionaryById</Property>
+            <Property name="loadMode">manual</Property>
+          </DataSet>
+          <AutoForm id="dictionaryFrom">
+            <Property name="dataSet">dsDiction</Property>
+            <Property name="cols">*</Property>
+            <AutoFormElement>
+              <Property name="name">code</Property>
+              <Property name="property">code</Property>
+              <Editor/>
+            </AutoFormElement>
+            <AutoFormElement>
+              <Property name="name">value</Property>
+              <Property name="property">value</Property>
+              <Editor/>
+            </AutoFormElement>
+          </AutoForm>
+          <Container layout="form">
+            <Button id="btnAddDictionary">
+              <ClientEvent name="onClick">view.id('addDicDialog').show();&#xD;
+</ClientEvent>
+              <Property name="caption">添加新类型</Property>
+              <Property name="hideMode">display</Property>
+              <Property name="visible">false</Property>
+            </Button>
+            <Button>
+              <Property name="caption">保存修改</Property>
+              <Property name="action">actionSave</Property>
+            </Button>
+          </Container>
+          <UpdateAction id="actionSave">
+            <Property name="successMessage">保存成功</Property>
+            <Property name="dataResolver">sostv.SosDictionaryPR#saveDictionary</Property>
+            <UpdateItem>
+              <Property name="dataSet">dsDiction</Property>
+            </UpdateItem>
+          </UpdateAction>
+          <Dialog id="addDicDialog">
+            <ClientEvent name="onShow">view.id('dsTmp').flush();&#xD;
+</ClientEvent>
+            <Property name="caption">添加新类型</Property>
+            <Property name="width">50%</Property>
+            <Property name="height">50%</Property>
+            <Buttons>
+              <Button>
+                <ClientEvent name="onClick">view.id('saveNewDic').set('parameter',{&#xD;
+	dic : view.id('newDicFrom').get('entity'),&#xD;
+	parentCode : view.id('dsDiction').getData().get('code')&#xD;
+}).execute(function(){&#xD;
+	view.id('addDicDialog').hide();&#xD;
+	view.id('dsDictionary').flush();&#xD;
+});&#xD;
+</ClientEvent>
+                <Property name="caption">保存</Property>
+              </Button>
+              <Button>
+                <ClientEvent name="onClick">view.id('addDicDialog').hide();&#xD;
+</ClientEvent>
+                <Property name="caption">取消</Property>
+              </Button>
+            </Buttons>
+            <Children>
+              <AutoForm id="newDicFrom">
+                <Property name="dataType">dtSosDictionary</Property>
+                <Property name="cols">*</Property>
+                <Property name="dataSet">dsTmp</Property>
+                <AutoFormElement>
+                  <Property name="name">code</Property>
+                  <Property name="property">code</Property>
+                  <Property name="label">类型编码</Property>
+                  <Editor/>
+                </AutoFormElement>
+                <AutoFormElement>
+                  <Property name="name">value</Property>
+                  <Property name="property">value</Property>
+                  <Property name="label">类型名称</Property>
+                  <Editor/>
+                </AutoFormElement>
+              </AutoForm>
+              <DataSet id="dsTmp">
+                <Property name="dataType">dtSosDictionary</Property>
+                <Property name="dataProvider">sostv.SosDictionaryPR#loadNullDictionary</Property>
+                <Property name="loadMode">manual</Property>
+              </DataSet>
+            </Children>
+            <Tools/>
+          </Dialog>
+          <AjaxAction id="saveNewDic">
+            <Property name="successMessage">保存成功</Property>
+            <Property name="parameter"/>
+            <Property name="service">sostv.SosDictionaryPR#saveNewDictionary</Property>
+          </AjaxAction>
+        </Container>
+      </MainControl>
+      <SideControl>
+        <Container>
+          <DataSet id="dsDictionary">
+            <Property name="dataProvider">sostv.SosDictionaryPR#loadAllDictionary</Property>
+            <Property name="dataType">[dtSosDictionary]</Property>
+          </DataSet>
+          <DataTree id="treeDictionary">
+            <ClientEvent name="onDataRowClick">view.id('dsDiction').set('parameter',{&#xD;
+	id : view.get(&quot;#treeDictionary.currentEntity.id&quot;)&#xD;
+}).flush();&#xD;
+</ClientEvent>
+            <Property name="dataSet">dsDictionary</Property>
+            <Property name="allowNoCurrent">true</Property>
+            <BindingConfigs>
+              <BindingConfig>
+                <Property name="name">dictionaries</Property>
+                <Property name="labelProperty">value</Property>
+                <Property name="hasChildProperty">hasChild</Property>
+                <Property name="recursive">true</Property>
+                <Property name="childrenProperty">dictionaries</Property>
+                <BindingConfig>
+                  <Property name="iconClass">fa fa-file-o</Property>
+                  <Property name="name">childDictionaries</Property>
+                  <Property name="labelProperty">value</Property>
+                  <Property name="childrenProperty">childDictionaries</Property>
+                </BindingConfig>
+              </BindingConfig>
+            </BindingConfigs>
+          </DataTree>
+        </Container>
+      </SideControl>
+    </SplitPanel>
+  </View>
+</ViewConfig>

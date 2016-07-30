@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ViewConfig>
+  <Arguments/>
+  <Context/>
+  <Model/>
+  <View>
+    <Button>
+      <ClientEvent name="onClick">alert(view.id('content').get('content'));&#xD;
+</ClientEvent>
+      <Property name="caption">内容</Property>
+    </Button>
+    <HtmlEditor id="content">
+      <Property name="mode">simple</Property>
+    </HtmlEditor>
+  </View>
+</ViewConfig>

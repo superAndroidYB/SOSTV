@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Model>
+  <DataType name="$dtSosVideo">
+    <Property name="creationType">com.sostv.app.models.SosVideo</Property>
+    <PropertyDef name="id">
+      <Property name="dataType">int</Property>
+      <Property name="label">ID_</Property>
+    </PropertyDef>
+    <PropertyDef name="videoName">
+      <Property></Property>
+      <Property name="label">视频名称</Property>
+      <Property name="required">true</Property>
+    </PropertyDef>
+    <PropertyDef name="vedioImage">
+      <Property></Property>
+      <Property name="label">视频图片地址</Property>
+      <Property name="required">true</Property>
+    </PropertyDef>
+    <PropertyDef name="videoHdUrl">
+      <Property></Property>
+      <Property name="label">视频高清地址</Property>
+      <Property name="required">true</Property>
+    </PropertyDef>
+    <PropertyDef name="videoSdUrl">
+      <Property></Property>
+      <Property name="label">视频标清地址</Property>
+      <Property name="required">true</Property>
+    </PropertyDef>
+    <PropertyDef name="pubDate">
+      <Property name="label">发布日期</Property>
+      <Property name="required">true</Property>
+    </PropertyDef>
+    <PropertyDef name="loveNum">
+      <Property name="dataType">int</Property>
+      <Property name="label">点赞数</Property>
+    </PropertyDef>
+    <PropertyDef name="lookNum">
+      <Property name="dataType">int</Property>
+      <Property name="label">观看数</Property>
+    </PropertyDef>
+    <PropertyDef name="typeLevel1">
+      <Property></Property>
+      <Property name="label">一级类别</Property>
+      <Property name="required">true</Property>
+    </PropertyDef>
+    <PropertyDef name="typeLevel2">
+      <Property></Property>
+      <Property name="label">二级类别</Property>
+      <Property name="required">true</Property>
+    </PropertyDef>
+  </DataType>
+  <DataType name="$dtSosBooks">
+    <Property name="matchType">com.sostv.app.models.SosBooks</Property>
+    <PropertyDef name="id">
+      <Property name="dataType">int</Property>
+      <Property name="label">编号</Property>
+    </PropertyDef>
+    <PropertyDef name="bookName">
+      <Property></Property>
+      <Property name="label">书籍名称</Property>
+    </PropertyDef>
+    <PropertyDef name="bookImage">
+      <Property></Property>
+      <Property name="label">书籍图片</Property>
+    </PropertyDef>
+    <PropertyDef name="bookLink">
+      <Property></Property>
+      <Property name="label">书籍链接</Property>
+    </PropertyDef>
+    <PropertyDef name="loveNum">
+      <Property name="dataType">int</Property>
+      <Property name="label">书籍点赞数</Property>
+    </PropertyDef>
+    <PropertyDef name="lookNum">
+      <Property name="dataType">int</Property>
+      <Property name="label">书籍观看数</Property>
+    </PropertyDef>
+    <PropertyDef name="typeLevel1">
+      <Property></Property>
+      <Property name="label">一级类别</Property>
+    </PropertyDef>
+    <PropertyDef name="typeLevel2">
+      <Property></Property>
+      <Property name="label">二级类别</Property>
+    </PropertyDef>
+  </DataType>
+  <DataType name="$dtSosHome">
+    <Property name="creationType">com.sostv.app.models.SosHome</Property>
+    <PropertyDef name="id">
+      <Property></Property>
+      <Property name="label">id_</Property>
+    </PropertyDef>
+    <PropertyDef name="title">
+      <Property></Property>
+      <Property name="label">标题</Property>
+      <Property name="required">true</Property>
+    </PropertyDef>
+    <PropertyDef name="ownType">
+      <Property></Property>
+      <Property name="label">所属类型</Property>
+    </PropertyDef>
+    <PropertyDef name="content">
+      <Property></Property>
+      <Property name="label">副标题</Property>
+      <Property name="required">true</Property>
+    </PropertyDef>
+    <PropertyDef name="link">
+      <Property></Property>
+      <Property name="label">link_</Property>
+    </PropertyDef>
+    <PropertyDef name="imageUrl">
+      <Property></Property>
+      <Property name="label">图片</Property>
+      <Property name="required">true</Property>
+    </PropertyDef>
+    <PropertyDef name="lookNum">
+      <Property name="dataType">long</Property>
+      <Property name="label">lookNum</Property>
+    </PropertyDef>
+    <PropertyDef name="date">
+      <Property name="dataType">Date</Property>
+      <Property name="label">date</Property>
+    </PropertyDef>
+  </DataType>
+</Model>
