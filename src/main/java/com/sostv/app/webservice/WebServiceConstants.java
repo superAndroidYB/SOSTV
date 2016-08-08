@@ -56,5 +56,4 @@ public class WebServiceConstants {
 	 * ·¢±íÆÀÂÛ
 	 */
 	public static final String SENDCOMMENT = "SENDCOMMENT";
-	
 }
