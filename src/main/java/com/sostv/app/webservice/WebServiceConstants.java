@@ -56,4 +56,14 @@ public class WebServiceConstants {
 	 * 发表评论
 	 */
 	public static final String SENDCOMMENT = "SENDCOMMENT";
+	
+	/**
+	 * 获取评论
+	 */
+	public static final String GETCOMMENT = "GETCOMMENT";
+	
+	/**
+	 * 获取推荐
+	 */
+	public static final String GETRECOMMEND = "GETRECOMMEND";
 }
