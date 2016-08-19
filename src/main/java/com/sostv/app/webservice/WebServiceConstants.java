@@ -38,7 +38,7 @@ public class WebServiceConstants {
 	public static final String SOS_CONTENT = "SOS_CONTENT";
 	
 	/**
-	 * 交互指令sdag
+	 * 交互指令
 	 */
 	public static final String ORDER = "ORDER";
 	
