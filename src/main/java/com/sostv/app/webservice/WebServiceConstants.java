@@ -3,7 +3,7 @@ package com.sostv.app.webservice;
 public class WebServiceConstants {
 
 	/**
-	 * 首页内容
+	 * 首页内容test
 	 */
 	public static final String HOME = "HOME";
 	
